@@ -1,0 +1,52 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "@protected": true,
+
+    "xsd":   "http://www.w3.org/2001/XMLSchema#",
+    "rdfs":  "http://www.w3.org/2000/01/rdf-schema#",
+    "didai": "https://did-ai.io/vocab#",
+
+    "subtype": {
+      "@id":   "didai:subtype",
+      "@type": "@vocab",
+      "rdfs:comment": "Fine-grained classification of a did:ai subject within its subject-type."
+    },
+
+    "displayName": {
+      "@id":   "didai:displayName",
+      "@type": "xsd:string",
+      "rdfs:comment": "A human-readable display name for a service entry or DID subject."
+    },
+
+    "DeveloperProfile": {
+      "@id": "didai:DeveloperProfile",
+      "@type": "@id",
+      "rdfs:comment": "Service type: developer identity profile. The serviceEndpoint returns developer profile data as defined in the AI Capability Descriptor specification."
+    },
+
+    "PublishedAssets": {
+      "@id": "didai:PublishedAssets",
+      "@type": "@id",
+      "rdfs:comment": "Service type: listing of skills and agents published by a developer."
+    },
+
+    "SkillFamily": {
+      "@id": "didai:SkillFamily",
+      "@type": "@id",
+      "rdfs:comment": "Service type: skill family metadata. The serviceEndpoint returns a skill descriptor as defined in the AI Capability Descriptor specification."
+    },
+
+    "AgentFamily": {
+      "@id": "didai:AgentFamily",
+      "@type": "@id",
+      "rdfs:comment": "Service type: agent family metadata. The serviceEndpoint returns an agent descriptor as defined in the AI Capability Descriptor specification."
+    },
+
+    "VersionList": {
+      "@id": "didai:VersionList",
+      "@type": "@id",
+      "rdfs:comment": "Service type: versioned asset listing. The serviceEndpoint returns an ordered list of available versions for a SkillFamily or AgentFamily, each with its own metadata and content location."
+    }
+  }
+}

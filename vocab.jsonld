@@ -1,0 +1,115 @@
+{
+  "@context": {
+    "rdf":     "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+    "rdfs":    "http://www.w3.org/2000/01/rdf-schema#",
+    "xsd":     "http://www.w3.org/2001/XMLSchema#",
+    "owl":     "http://www.w3.org/2002/07/owl#",
+    "dcterms": "http://purl.org/dc/terms/",
+    "didai":   "https://did-ai.io/vocab#",
+    "didaicap":"https://did-ai.io/vocab/cap#"
+  },
+
+  "@graph": [
+
+    {
+      "@id": "https://did-ai.io/vocab",
+      "@type": "owl:Ontology",
+      "rdfs:label": "did:ai Core Vocabulary",
+      "rdfs:comment": "The core vocabulary for the did:ai DID Method. Defines service types, properties, and subject classifications used in did:ai DID Documents.",
+      "dcterms:created": "2026-03-20",
+      "dcterms:publisher": "Cowshed AI Working Group",
+      "dcterms:license": "https://www.apache.org/licenses/LICENSE-2.0",
+      "owl:versionInfo": "1.0.0",
+      "rdfs:seeAlso": "https://github.com/did-ai/did-method-spec"
+    },
+
+    {
+      "@id": "https://did-ai.io/vocab/cap",
+      "@type": "owl:Ontology",
+      "rdfs:label": "did:ai AI Capability Descriptor Vocabulary (Reserved)",
+      "rdfs:comment": "Reserved namespace for terms defined by the AI Capability Descriptor companion specification. No terms are defined here in v1.0.0. Terms will be added when the companion specification is published.",
+      "owl:versionInfo": "reserved",
+      "rdfs:seeAlso": "https://github.com/did-ai/capability-descriptor-spec"
+    },
+
+    {
+      "@id": "didai:DIDServiceType",
+      "@type": "rdfs:Class",
+      "rdfs:label": "DID Service Type",
+      "rdfs:comment": "Abstract superclass for all did:ai service types. All concrete service types in this vocabulary are instances of this class.",
+      "rdfs:isDefinedBy": "https://did-ai.io/vocab"
+    },
+
+    {
+      "@id": "didai:DeveloperProfile",
+      "@type": ["rdfs:Class", "didai:DIDServiceType"],
+      "rdfs:label": "DeveloperProfile",
+      "rdfs:comment": "A service type that exposes developer identity profile data. The serviceEndpoint returns a JSON object whose schema is defined by the AI Capability Descriptor specification. MAY include a displayName property.",
+      "rdfs:isDefinedBy": "https://did-ai.io/vocab",
+      "rdfs:subClassOf": "didai:DIDServiceType"
+    },
+
+    {
+      "@id": "didai:PublishedAssets",
+      "@type": ["rdfs:Class", "didai:DIDServiceType"],
+      "rdfs:label": "PublishedAssets",
+      "rdfs:comment": "A service type that provides a listing of all skills and agents published by a developer. The serviceEndpoint returns a paginated index of Skill and Agent DIDs controlled by the developer.",
+      "rdfs:isDefinedBy": "https://did-ai.io/vocab",
+      "rdfs:subClassOf": "didai:DIDServiceType"
+    },
+
+    {
+      "@id": "didai:SkillFamily",
+      "@type": ["rdfs:Class", "didai:DIDServiceType"],
+      "rdfs:label": "SkillFamily",
+      "rdfs:comment": "A service type that exposes metadata about an AI skill family. The serviceEndpoint returns a skill descriptor document whose schema is defined by the AI Capability Descriptor specification.",
+      "rdfs:isDefinedBy": "https://did-ai.io/vocab",
+      "rdfs:subClassOf": "didai:DIDServiceType"
+    },
+
+    {
+      "@id": "didai:AgentFamily",
+      "@type": ["rdfs:Class", "didai:DIDServiceType"],
+      "rdfs:label": "AgentFamily",
+      "rdfs:comment": "A service type that exposes metadata about an AI agent family. The serviceEndpoint returns an agent descriptor document whose schema is defined by the AI Capability Descriptor specification.",
+      "rdfs:isDefinedBy": "https://did-ai.io/vocab",
+      "rdfs:subClassOf": "didai:DIDServiceType"
+    },
+
+    {
+      "@id": "didai:VersionList",
+      "@type": ["rdfs:Class", "didai:DIDServiceType"],
+      "rdfs:label": "VersionList",
+      "rdfs:comment": "A service type that provides an ordered list of available versions for a SkillFamily or AgentFamily. Each version entry includes a version identifier, content hash, publication timestamp, and content URL. The exact version entry schema is defined by the AI Capability Descriptor specification.",
+      "rdfs:isDefinedBy": "https://did-ai.io/vocab",
+      "rdfs:subClassOf": "didai:DIDServiceType"
+    },
+
+    {
+      "@id": "didai:subtype",
+      "@type": "rdf:Property",
+      "rdfs:label": "subtype",
+      "rdfs:comment": "A fine-grained classification of a did:ai DID subject within its subject-type (dev, skill, or agent). This is a convenience label and does not affect DID resolution or cryptographic operations. Binding subtype values to Verifiable Credential schemas is delegated to the AI Capability Descriptor specification.",
+      "rdfs:domain": {
+        "@id": "owl:Thing",
+        "rdfs:comment": "Applicable to any did:ai DID Document subject."
+      },
+      "rdfs:range": {
+        "@id": "xsd:string"
+      },
+      "rdfs:isDefinedBy": "https://did-ai.io/vocab"
+    },
+
+    {
+      "@id": "didai:displayName",
+      "@type": "rdf:Property",
+      "rdfs:label": "displayName",
+      "rdfs:comment": "A human-readable display name associated with a service entry or DID subject. Intended for UI presentation only; has no normative effect on identity or trust. Controllers should avoid including personally identifiable information (PII) in this field if the DID Document may be publicly indexed.",
+      "rdfs:range": {
+        "@id": "xsd:string"
+      },
+      "rdfs:isDefinedBy": "https://did-ai.io/vocab"
+    }
+
+  ]
+}
